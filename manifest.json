@@ -1,7 +1,7 @@
 {
 	"manifest_version":2,
 	"name":"QLIK Scroller",
-	"version":"0.1",
+	"version":"1.0",
 	"permissions": 
 	[
     	"tabs",
@@ -10,8 +10,7 @@
 	"content_scripts": [
 		{
 			"matches": [
-				"*://dev.qlik.borgwarner.net/*",
-				"*://qlik.borgwarner.net/*"
+				"*://*/*",
 			],
 			"run_at": "document_end",
 			"js": [
