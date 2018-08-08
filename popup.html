@@ -6,7 +6,7 @@
 	    	button {
 	    		border: none;
 	    		color: white;
-	    		padding: 8px 24px;
+	    		padding: 4px 16px;
 	    		text-align: center;
 	    		text-decoration: none;
 	    		display: inline-block;
@@ -23,20 +23,21 @@
 	    </style>
     </head>
       
-    <body onload="initialize()">
+    <body >
+    	<div style="width:430px;">
+	    	<p>
+	    		Time Per Each Sheet: 
+	    		<input type="number" name="refresh" id="txtRefresh"  min="1" step="1"> 
+	    		<button id="btnRefresh">Set Value</button>
+	    		<br>
+	    		<i><label style="color:rgb(120,120,120)" id="user_message"></label></i>
+	    	</p>
 
-    	<p>
-    		Time Per Each Sheet: <input type="number" name="refresh" id="txtRefresh"> 
-    		<button id="setRefresh" onclick="SetRefresh_Click();">Set Value</button>
-    		<br>
-    		<label id="user_message"></label>
-    	</p>
+	    		
+	        <button id="toggle">Start Scrolling</button>  
 
-    		
-        <button id="toggle" onclick="Toggle_Click();">Start Scrolling</button>  
-
-        <script src="popup.js"></script> 
-
+	        <script src="popup.js"></script> 
+        </div>
     </body>
 
 </html>
