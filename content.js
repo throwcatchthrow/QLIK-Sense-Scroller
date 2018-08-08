@@ -10,9 +10,11 @@ chrome.storage.sync.get(['qlik_scrolling'], function(data) {
 	if (data.qlik_scrolling == null) {
 		chrome.storage.sync.set({'qlik_scrolling':false}, function(){
 			console.log('Default Scrolling to False');
+			execute_scroll = false;
 		});
 	} else {
 		console.log('Scrolling: ' + data.qlik_scrolling);
+		execute_scroll = data.qlik_scrolling;
 	}
 	
 });
@@ -29,37 +31,32 @@ chrome.storage.sync.get(['qlik_refresh_interval'], function(data) {
 	
 });
 
-
-
 // Handles the Looping Interval
 setInterval(
 	function(){
 
-
-		// Handles the On/Off Parameter
-		chrome.storage.sync.get(['qlik_scrolling'], function(data) {
-			if (data.qlik_scrolling == null) {
-				chrome.storage.sync.set({'qlik_scrolling':false}, function(){
-					console.log('Default Scrolling to False');
-				});
-			} else {
-				console.log('Scrolling: ' + data.qlik_scrolling);
-			}
-			
-		});
-
 		// Creates variables for the previous and next buttons in QLIK Sense
 		var nxt = document.querySelector("button[tid='btnQuickNavNext']");
 		var prv = document.querySelector("button[tid='btnQuickNavPrevious']");
-
 	 	if ((nxt != null)||(prv != null)){
 
-			// Checks if Page requires reloading (based on if service popup dialog is showing)
-			if(console.log(document.getElementById("show-service-popup-dialog")==null)) {	
+	 			// Handles the On/Off Parameter
+				chrome.storage.sync.get(['qlik_scrolling'], function(data) {
+					if (data.qlik_scrolling == null) {
+						chrome.storage.sync.set({'qlik_scrolling':false}, function(){
+							execute_scroll = false;
+						});
+					} else {
+						execute_scroll = data.qlik_scrolling
+					}
+					
+				});
+			
+			if((document.getElementById("show-service-popup-dialog")!=null)) {	
 				location.reload();
 			}
 			// Checks if scroll should be currently executing
-			else if (execute_scroll == true) {
+			else if (execute_scroll) {
 
 				// Validates scrolling direction and when it should be reversed
 				if ((direction_forward && nxt.disabled)||(!direction_forward && prv.disabled)) {
@@ -74,12 +71,14 @@ setInterval(
 					MouseEventSequence(prv);
 					console.log("Move Backward");
 				}
+			} else{
+				console.log("Scrolling Is Paused.")
 			}
 		}
 		else {
 			console.log("Next/Previous Button Could Not Be Found");
 		}
-	},refresh_rate*1000);
+	},(10000));
 
 
 // Handles the Mouse Event Sequence
