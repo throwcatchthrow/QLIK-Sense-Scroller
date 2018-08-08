@@ -1,6 +1,6 @@
 {
 	"manifest_version":2,
-	"name":"QLIK Scroller",
+	"name":"QLIK Sense Scroller",
 	"version":"1.0",
 	"permissions": 
 	[
