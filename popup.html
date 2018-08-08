@@ -1,0 +1,42 @@
+<!doctype html>  
+<html>  
+    <head>
+    	<title>	QLIK Sense Scroller</title>
+	    <style>
+	    	button {
+	    		border: none;
+	    		color: white;
+	    		padding: 8px 24px;
+	    		text-align: center;
+	    		text-decoration: none;
+	    		display: inline-block;
+	    		font-size: 14px;
+	    		background-color: #008CBA;
+	    	}
+	    	p {
+	    		font-family: "arial"
+	    	}
+
+	    	input {
+
+	    	}
+	    </style>
+    </head>
+      
+    <body onload="initialize()">
+
+    	<p>
+    		Time Per Each Sheet: <input type="number" name="refresh" id="txtRefresh"> 
+    		<button id="setRefresh" onclick="SetRefresh_Click();">Set Value</button>
+    		<br>
+    		<label id="user_message"></label>
+    	</p>
+
+    		
+        <button id="toggle" onclick="Toggle_Click();">Start Scrolling</button>  
+
+        <script src="popup.js"></script> 
+
+    </body>
+
+</html>
